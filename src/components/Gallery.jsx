@@ -11,7 +11,7 @@ const Gallery = ({ tours, setTours, onRemove }) => {
     // function to fetch tours from the API: https://course-api.com/react-tours-project
     const fetchTours = async () => {
         try {
-            const res = await fetch("https://course-api.com/react-tours-project");
+            const res = await fetch("https://cors-anywhere.herokuapp.com/https://course-api.com/react-tours-project");
             // Maps the api to only the required data
             const tourData = data.map((tour) => ({
                 id: tour.id,
