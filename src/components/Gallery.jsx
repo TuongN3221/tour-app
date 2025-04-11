@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import TourCard from "./TourCard";
 
-// Gallery component is responsible for fetching tours and rendering the list
-const Gallery = ({ tours, onRemove }) => {
-  const [fetchedTours, setFetchedTours] = useState([]);
-
-  // Fetch tours data from the API on component mount
+const Gallery = ({ tours, setTours, onRemove }) => {
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const response = await fetch("https://api.allorigins.win/raw?url=https://course-api.com/react-tours-project")        ;
+        const response = await fetch(
+          "https://api.allorigins.win/raw?url=https://course-api.com/react-tours-project"
+        );
         const data = await response.json();
-        setFetchedTours(data);
+        setTours(data); // Directly set the fetched tours
       } catch (error) {
         console.error("Error fetching tours:", error);
       }
     };
 
     fetchTours();
-  }, []);
+  }, [setTours]);
 
   return (
     <section className="gallery">
-      {fetchedTours.map((tour) => (
+      {tours.map((tour) => (
         <TourCard
           key={tour.id}
           id={tour.id}
